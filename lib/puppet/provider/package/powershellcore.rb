@@ -73,7 +73,7 @@ Puppet::Type.type(:package).provide :powershellcore, parent: Puppet::Provider::P
   def self.instances_command
     # Get-Package is way faster than Get-InstalledModule
     <<-COMMAND
-    Get-Package -AllVersions -ProviderName PowerShellGet -Scope AllUsers -Type Module |
+    Get-Package -AllVersions -ProviderName PowerShellGet -Scope AllUsers -Type Module -WarningAction SilenltyContinue |
     Group-Object -Property Name | % {
       [ordered]@{
         'name' = $_.Name
